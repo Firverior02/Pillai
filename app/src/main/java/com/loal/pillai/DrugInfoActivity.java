@@ -40,7 +40,7 @@ public class DrugInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drug_info);
 
-        // Get additional info
+        // Get additional info (EAN Code)
         Intent intent = getIntent();
         drugEANCode = intent.getStringExtra("CODE");
 

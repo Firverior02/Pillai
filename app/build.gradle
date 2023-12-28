@@ -57,4 +57,7 @@ dependencies {
 
     // SVG images
     implementation 'com.caverock:androidsvg:1.4'
+
+    // Postgresql
+    implementation 'org.postgresql:postgresql:42.2.5'
 }
