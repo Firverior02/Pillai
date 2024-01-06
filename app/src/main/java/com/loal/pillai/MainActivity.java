@@ -24,13 +24,22 @@ public class MainActivity extends AppCompatActivity {
 
     String lastCode;
 
+    ScannerFragment scannerFragment;
+    HelpFragment helpFragment;
+    AccountFragment accountFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize fragments
+        scannerFragment = new ScannerFragment();
+        helpFragment = new HelpFragment();
+        accountFragment = new AccountFragment();
+
         // Set the default fragment to scanner
-        replaceFragment(new ScannerFragment());
+        replaceFragment(scannerFragment);
 
         scanBtn = findViewById(R.id.scanBtn);
         continueCard = findViewById(R.id.continueCard);
@@ -47,14 +56,14 @@ public class MainActivity extends AppCompatActivity {
             switch(item.getItemId()) {
                 case R.id.help:
                     showButtons(null);
-                    replaceFragment(new HelpFragment());
+                    replaceFragment(helpFragment);
                     break;
                 case R.id.account:
                     showButtons(null);
-                    replaceFragment(new AccountFragment());
+                    replaceFragment(accountFragment);
                     break;
                 case R.id.scan:
-                    replaceFragment(new ScannerFragment());
+                    replaceFragment(scannerFragment);
                     break;
             }
             return true;
