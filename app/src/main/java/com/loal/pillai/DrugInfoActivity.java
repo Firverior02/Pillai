@@ -22,11 +22,8 @@ import java.util.Locale;
 public class DrugInfoActivity extends AppCompatActivity {
 
     String drugEANCode;
-    String CODE_ALVEDON = "7046260070127";
 
     LinearLayout backBtn;
-
-    TextView drugNameText;
 
     RecyclerView recyclerView;
 
@@ -57,7 +54,6 @@ public class DrugInfoActivity extends AppCompatActivity {
 
 
         // Find views
-        drugNameText = findViewById(R.id.drugNameText);
         recyclerView = findViewById(R.id.drugInfoRecycler);
         backBtn = findViewById(R.id.backBtn);
         searchView = findViewById(R.id.searchView);
@@ -79,13 +75,6 @@ public class DrugInfoActivity extends AppCompatActivity {
             startActivity(readIntent);
         });
 
-        // Code result
-        if(drugEANCode.equals(CODE_ALVEDON)) {
-            drugNameText.setText("Alvedon");
-        } else {
-            drugNameText.setText("Not recognized");
-        }
-
         // Recycler view with options
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         adapter = new DrugInfoAdapter(this, options, selectedOptions);
@@ -93,12 +82,11 @@ public class DrugInfoActivity extends AppCompatActivity {
 
         // Search options
         searchView.clearFocus();
-        searchView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        searchView.setOnClickListener(view -> {
 
-            }
         });
+
+        // Listener for search bar
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -107,6 +95,7 @@ public class DrugInfoActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String s) {
+                // Filter options based on the search term
                 filterOptions(s);
                 return false;
             }

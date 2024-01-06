@@ -161,22 +161,30 @@ public class ScannerFragment extends Fragment {
      * @param imageProxy The image to scan
      */
     @OptIn(markerClass = ExperimentalGetImage.class) private void scanBarcode(ImageProxy imageProxy) {
+        // Initialize barcode scanner and image
         BarcodeScanner scanner = BarcodeScanning.getClient();
         InputImage inputImage = InputImage.fromMediaImage(Objects.requireNonNull(imageProxy.getImage()), imageProxy.getImageInfo().getRotationDegrees());
 
+        // Scan the image
         scanner.process(inputImage)
+                // Listeners
                 .addOnSuccessListener(barcodes -> {
                     for (Barcode barcode : barcodes) {
+                        // Extract the scanned code
                         String rawValue = barcode.getRawValue();
+
+                        // Display the scanned value
                         codePreview.setText(rawValue);
 
+                        // Safe way of calling the Fragments parent
                         if (getActivity() instanceof MainActivity) {
+                            // Show the continue button if there is a scanned code
                             ((MainActivity) getActivity()).showButtons(rawValue);
                         }
                     }
                 })
                 .addOnFailureListener(e -> {
-                    // Handle errors
+                    //TODO: Handle errors
                 });
     }
 

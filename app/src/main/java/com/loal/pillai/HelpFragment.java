@@ -22,8 +22,9 @@ public class HelpFragment extends Fragment {
 
     private Button updateButton;
 
-    public final String LOCAL_IP = "192.168.1.76";
 
+    //TODO: Remove these and improve security
+    public final String LOCAL_IP = "192.168.1.76";
     public final String LOCAL_PORT = "5432";
     public final String DATABASE_USER = "myuser";
     public final String DATABASE_PASSWORD = "mypassword";
@@ -55,7 +56,7 @@ public class HelpFragment extends Fragment {
                 String url = "jdbc:postgresql://" + LOCAL_IP + ":" + LOCAL_PORT + "/" + DATABASE_NAME;
                 Connection conn = DriverManager.getConnection(url, DATABASE_USER, DATABASE_PASSWORD);
 
-                // Create a statement (like a cursor)
+                // Create a statement (similar to a cursor)
                 Statement statement = conn.createStatement();
 
                 // Query database

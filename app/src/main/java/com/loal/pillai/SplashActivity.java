@@ -31,13 +31,12 @@ public class SplashActivity extends AppCompatActivity {
             throw new RuntimeException(e);
         }
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        // Set a 3 second delay in which the splash screen is shown
+        new Handler().postDelayed(() -> {
+            // Start the main activity after
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         }, 3000);
     }
 }

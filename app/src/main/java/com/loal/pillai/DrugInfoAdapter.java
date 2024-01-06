@@ -21,12 +21,23 @@ public class DrugInfoAdapter extends RecyclerView.Adapter<DrugInfoAdapter.ViewHo
     private List<String> titles;
     private List<Boolean> selectedOptions;
 
+    /**
+     * Adapter for different information on drugs
+     * @param context The current context
+     * @param titles Titles for information types
+     * @param selectedOptions Which information has been selected
+     */
     public DrugInfoAdapter(Context context, List<String> titles, List<Boolean> selectedOptions) {
         this.layoutInflater = LayoutInflater.from(context);
         this.titles = titles;
         this.selectedOptions = selectedOptions;
     }
 
+    /**
+     * Store the filtered list based on the selected options
+     * @param titles Titles to be saved
+     * @param selectedOptions Options to be saved
+     */
     public void setFilteredList(ArrayList<String> titles, ArrayList<Boolean> selectedOptions) {
         this.titles = titles;
         this.selectedOptions = selectedOptions;
@@ -37,6 +48,7 @@ public class DrugInfoAdapter extends RecyclerView.Adapter<DrugInfoAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Create a new view holder (instance of a drug info card) is created
         View newView = layoutInflater.inflate(R.layout.drug_info_card, parent, false);
         return new ViewHolder(newView);
     }
@@ -69,6 +81,7 @@ public class DrugInfoAdapter extends RecyclerView.Adapter<DrugInfoAdapter.ViewHo
         return titles.size();
     }
 
+    // Class to describe the contents of the view holder (drug info card)
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView info_label;

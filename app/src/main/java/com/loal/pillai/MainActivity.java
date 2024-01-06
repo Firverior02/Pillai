@@ -69,9 +69,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
+        // Set up the continue button to navigate to drug info
         continueBtn.setOnClickListener(view -> {
+            // Set up a new intent (activity)
             Intent intent = new Intent(getApplicationContext(), DrugInfoActivity.class);
+
+            // Send the scanned code to the new activity
             intent.putExtra("CODE", lastCode);
+
+            // Start the new activity
             startActivity(intent);
         });
     }
@@ -87,12 +93,20 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
     }
 
+    /**
+     * Show and hide navigation buttons
+     * TODO: Improve this as it is quite an ugly solution
+     * @param code The scanned EAN-code, if null no code has been scanned
+     */
     public void showButtons(String code) {
+        // Update the last code scanned
         lastCode = code;
         if(code != null) {
+            // Display continue button and hide scan button
             scanBtn.setVisibility(View.GONE);
             continueCard.setVisibility(View.VISIBLE);
         } else {
+            // Display scan button and hide continue button
             scanBtn.setVisibility(View.VISIBLE);
             continueCard.setVisibility(View.GONE);
         }
