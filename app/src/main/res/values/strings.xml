@@ -12,7 +12,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 
-
     <!-- Options to select -->
     <string-array name="drug_info_options">
         <item>Side effects</item>

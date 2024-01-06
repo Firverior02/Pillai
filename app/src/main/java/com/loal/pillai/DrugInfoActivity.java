@@ -7,8 +7,10 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +37,8 @@ public class DrugInfoActivity extends AppCompatActivity {
 
     SearchView searchView;
 
+    CardView videoBtn, readBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,9 +61,23 @@ public class DrugInfoActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.drugInfoRecycler);
         backBtn = findViewById(R.id.backBtn);
         searchView = findViewById(R.id.searchView);
+        videoBtn = findViewById(R.id.play_button);
+        readBtn = findViewById(R.id.read_button);
 
         // Back button
         backBtn.setOnClickListener(view -> this.finish());
+
+        // Video button
+        videoBtn.setOnClickListener(view -> {
+            Intent videoIntent = new Intent(getApplicationContext(), VideoActivity.class);
+            startActivity(videoIntent);
+        });
+
+        // Read button
+        readBtn.setOnClickListener(view -> {
+            Intent readIntent = new Intent(getApplicationContext(), ReadActivity.class);
+            startActivity(readIntent);
+        });
 
         // Code result
         if(drugEANCode.equals(CODE_ALVEDON)) {
