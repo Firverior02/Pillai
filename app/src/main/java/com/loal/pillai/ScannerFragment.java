@@ -9,6 +9,7 @@ import android.graphics.ImageFormat;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.graphics.YuvImage;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleOwner;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.TextureView;
@@ -42,6 +44,11 @@ import com.google.mlkit.vision.common.InputImage;
 
 import java.io.ByteArrayOutputStream;
 import java.nio.ByteBuffer;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Objects;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
@@ -55,9 +62,16 @@ import androidx.activity.result.contract.ActivityResultContracts;
 public class ScannerFragment extends Fragment {
 
     private PreviewView previewView;
-    private TextView codePreview;
+    public TextView codePreview;
     private Executor executor = Executors.newSingleThreadExecutor();
     private ActivityResultLauncher<String> permissionLauncher;
+
+    //TODO: Remove these and improve security
+    public final String LOCAL_IP = "192.168.1.76";
+    public final String LOCAL_PORT = "5432";
+    public final String DATABASE_USER = "myuser";
+    public final String DATABASE_PASSWORD = "mypassword";
+    public final String DATABASE_NAME = "mydatabase";
 
 
     @Override
@@ -173,8 +187,10 @@ public class ScannerFragment extends Fragment {
                         // Extract the scanned code
                         String rawValue = barcode.getRawValue();
 
-                        // Display the scanned value
-                        codePreview.setText(rawValue);
+                        // Get drug name from the database
+                        new DatabaseTask().execute(rawValue);
+
+                        //codePreview.setText(rawValue);
 
                         // Safe way of calling the Fragments parent
                         if (getActivity() instanceof MainActivity) {
@@ -228,5 +244,59 @@ public class ScannerFragment extends Fragment {
         // Convert JPEG to Bitmap and return
         byte[] imageBytes = out.toByteArray();
         return BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+    }
+
+    private class DatabaseTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            // The EAN code to query
+            String eanCode = params[0].trim();
+
+            // Collect the result from the query
+            StringBuilder result = new StringBuilder();
+            try {
+                // Set up connection to database
+                Class.forName("org.postgresql.Driver");
+                String url = "jdbc:postgresql://" + LOCAL_IP + ":" + LOCAL_PORT + "/" + DATABASE_NAME;
+                Connection conn = DriverManager.getConnection(url, DATABASE_USER, DATABASE_PASSWORD);
+
+                // Log the EAN code being used
+                Log.d("DatabaseTask", "EAN Code: " + params[0]);
+
+
+                // Create a prepared statement
+                String sql = "SELECT * FROM products WHERE ean = '07046260070127'";
+                PreparedStatement preparedStatement = conn.prepareStatement(sql);
+
+                // Set the value of the placeholder
+                //preparedStatement.setString(1, eanCode);
+
+                // Log the query
+                Log.d("DatabaseTask", "Executing query: " + preparedStatement.toString());
+
+                // Execute the query
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Handle the response
+                while (rs.next()) {
+                    result.append(rs.getString("name")).append("\n");
+                }
+
+                // Close connection
+                rs.close();
+                preparedStatement.close();
+                conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+                result = new StringBuilder("Error fetching data.");
+            }
+            return result.toString();
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            // After getting the response
+            codePreview.setText(result);
+        }
     }
 }

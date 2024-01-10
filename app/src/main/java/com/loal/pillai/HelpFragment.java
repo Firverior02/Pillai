@@ -65,7 +65,7 @@ public class HelpFragment extends Fragment {
 
                 // Handle the response
                 while (rs.next()) {
-                    result.append(rs.getString("name")).append("\n");
+                    result.append(rs.getString("ean")).append("\n");
                 }
 
                 // Close connection

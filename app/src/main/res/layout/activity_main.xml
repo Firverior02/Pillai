@@ -44,7 +44,7 @@
         app:backgroundTint="@color/white"
         app:borderWidth="0dp"
         app:layout_anchor="@id/bottomAppBar"
-        app:maxImageSize="90dp">
+        app:maxImageSize="30dp">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
@@ -66,6 +66,5 @@
             android:backgroundTint="@color/green"/>
 
     </androidx.cardview.widget.CardView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
