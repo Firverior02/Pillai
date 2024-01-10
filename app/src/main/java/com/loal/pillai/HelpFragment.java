@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.sql.Connection;
@@ -20,7 +21,7 @@ public class HelpFragment extends Fragment {
 
     private TextView resultTextView;
 
-    private Button updateButton;
+    private ImageButton updateButton;
 
 
     //TODO: Remove these and improve security
@@ -65,7 +66,16 @@ public class HelpFragment extends Fragment {
 
                 // Handle the response
                 while (rs.next()) {
-                    result.append(rs.getString("ean")).append("\n");
+                    // Fetch multiple columns
+                    String ean = rs.getString("ean");
+                    String name = rs.getString("name");
+                    String npl = rs.getString("npl");
+
+                    // Append them to the result string
+                    result.append("EAN: ").append(ean)
+                            .append(", Name: ").append(name)
+                            .append(", NPL: ").append(npl)
+                            .append("\n");
                 }
 
                 // Close connection
