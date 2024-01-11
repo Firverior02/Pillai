@@ -8,6 +8,7 @@ import android.graphics.drawable.PictureDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -18,6 +19,7 @@ public class VideoActivity extends AppCompatActivity {
 
     VideoView videoView;
     ImageView head;
+    LinearLayout backBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,5 +62,9 @@ public class VideoActivity extends AppCompatActivity {
         } catch (SVGParseException e) {
             throw new RuntimeException(e);
         }
+
+        // Back btn
+        backBtn = findViewById(R.id.backBtn);
+        backBtn.setOnClickListener(view -> this.finish());
     }
 }

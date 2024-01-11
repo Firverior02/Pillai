@@ -6,7 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".VideoActivity">
 
+    <LinearLayout
+        android:id="@+id/backBtn"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:rotation="180"
+            app:tint="@color/white"
+            app:srcCompat="@drawable/continue_icon" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Topics"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/head"
