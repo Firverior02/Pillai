@@ -1,0 +1,19 @@
+<svg viewBox="0 0 141.074 87.43" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:bx="https://boxy-svg.com">
+  <g transform="matrix(1, 0, 0, 1, -163.760605, -108.113045)">
+    <title>Head</title>
+    <g>
+      <g transform="matrix(-1, 0, 0, 1, 467.577606, -0.113998)">
+        <ellipse style="fill: rgb(255, 255, 255);" cx="187.869" cy="130.123" rx="9.009" ry="9.009"></ellipse>
+        <rect x="196.395" y="134.306" width="24.453" height="4.022" style="fill: rgb(255, 255, 255);" transform="matrix(0.696092, 0.717953, -0.717953, 0.696092, 154.031647, -100.630569)"></rect>
+      </g>
+      <path style="fill: rgb(255, 255, 255);" transform="matrix(0.160875, 0, 0, -0.160875, 112.79287, 297.594604)" d="M 997 728 A 243 243 0 1 1 511 728 L 754 728 Z"></path>
+      <g>
+        <ellipse style="fill: rgb(255, 255, 255);" cx="187.869" cy="130.123" rx="9.009" ry="9.009"></ellipse>
+      </g>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 0, -0.113998)">
+      <rect x="196.395" y="134.306" width="24.453" height="4.022" style="fill: rgb(255, 255, 255);" transform="matrix(0.696092, 0.717953, -0.717953, 0.696092, 153.549011, -100.469696)"></rect>
+      <ellipse style="fill: rgb(255, 255, 255);" cx="187.869" cy="130.123" rx="9.009" ry="9.009"></ellipse>
+    </g>
+  </g>
+</svg>
