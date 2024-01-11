@@ -39,8 +39,8 @@ public class VideoActivity extends AppCompatActivity {
         videoView.setMediaController(mediaController);
         mediaController.setAnchorView(videoView);
 
-        // Start video
-        videoView.start();
+        // Auto start video
+        //videoView.start();
 
         // Head SVG
         head = findViewById(R.id.head);
