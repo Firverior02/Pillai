@@ -9,8 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -22,6 +24,11 @@ public class HelpFragment extends Fragment {
     private TextView resultTextView;
 
     private ImageButton updateButton;
+
+    private Button updateIPBtn;
+    private EditText ipInput;
+
+    private String ip;
 
 
     //TODO: Remove these and improve security
@@ -39,9 +46,17 @@ public class HelpFragment extends Fragment {
         // Get views
         resultTextView = view.findViewById(R.id.resultTextView);
         updateButton = view.findViewById(R.id.updateButton);
+        updateIPBtn = view.findViewById(R.id.updateIPBtn);
+        ipInput = view.findViewById(R.id.ipInput);
 
         // Execute query when button is pressed
         updateButton.setOnClickListener(v -> new DatabaseTask().execute());
+
+        // Update IP
+        updateIPBtn.setOnClickListener(view1 -> {
+            ip = ipInput.getText().toString();
+            Toast.makeText(getActivity().getApplicationContext(), "Updated IP: " + ip, Toast.LENGTH_SHORT).show();
+        });
 
         return view;
     }
@@ -54,7 +69,7 @@ public class HelpFragment extends Fragment {
             try {
                 // Set up connection to database
                 Class.forName("org.postgresql.Driver");
-                String url = "jdbc:postgresql://" + LOCAL_IP + ":" + LOCAL_PORT + "/" + DATABASE_NAME;
+                String url = "jdbc:postgresql://" + ip + ":" + LOCAL_PORT + "/" + DATABASE_NAME;
                 Connection conn = DriverManager.getConnection(url, DATABASE_USER, DATABASE_PASSWORD);
 
                 // Create a statement (similar to a cursor)
